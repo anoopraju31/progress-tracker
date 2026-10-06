@@ -1,18 +1,21 @@
-import type { ReactNode } from "react";
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
+import './globals.css';
+import { ReduxProvider } from '@/store/Providers';
 
-import "./globals.css";
+export const metadata: Metadata = {
+  title: 'Progress Tracker | Hierarchical Goal & Task Management',
+  description: 'Track multi-tiered goals and recursive task hierarchies with interactive container drilldowns.',
+};
 
-type Props = {
-  children: ReactNode
-}
-
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang="en"
-      className='h-full antialiased'
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className="h-full antialiased dark">
+      <body className="min-h-full flex flex-col bg-[#090d16] text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200">
+        <ReduxProvider>
+          {children}
+        </ReduxProvider>
+      </body>
     </html>
   );
 }
